@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { topNavLinks } from "../constants"
 import {
   DropdownMenu,
@@ -10,16 +10,18 @@ import {
 function DropDown({ navLink }) {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="font-semibold hover:text-[#1B4DE7] duration-100">{navLink.label}</DropdownMenuTrigger>
+      <DropdownMenuTrigger className="font-semibold hover:text-[#1B4DE7] duration-100 focus:outline-none text-nowrap px-2">
+        {navLink.label}
+      </DropdownMenuTrigger>
       <DropdownMenuContent className="bg-[#212B42] border-none p-4">
         {
-          navLink.link.map(navLink => {
+          navLink.link.map((navLink, index) => {
             return (
-              <DropdownMenuItem className="text-white">
-                <Link to={navLink.innerLink} className="text-[16px] font-semibold hover:text-[#1B4DE7] duration-100">
+              <Link key={index} to={navLink.innerLink}>
+                <DropdownMenuItem  className="text-white text-[0.5rem] font-semibold hover:text-[#1B4DE7] duration-100 hover:cursor-pointer">
                   {navLink.innerLabel}
-                </Link>
-              </DropdownMenuItem>
+                </DropdownMenuItem>
+              </Link>
             )
           })
         }
@@ -29,6 +31,8 @@ function DropDown({ navLink }) {
 }
 
 function Header() {
+  const navigate = useNavigate()
+
   return (
     <header className="bg-black px-8 py-4 border-b border-b-gray-900">
       <nav className="flex items-center">
@@ -45,15 +49,15 @@ function Header() {
           </div>
 
           <div>
-            <ul className="flex items-center gap-10">
+            <ul className="flex justify-around items-center">
               {
                 topNavLinks.map(navLink => {
                   return Array.isArray(navLink.link)
                     ? (
-                      <DropDown navLink={navLink} />
+                      <DropDown key={navLink.label} navLink={navLink} />
                     ): (
-                      <li className="font-semibold hover:text-[#1B4DE7] duration-100">
-                        <Link key={navLink.label} to={navLink.link}>
+                      <li key={navLink.label} className="font-semibold hover:text-[#1B4DE7] duration-100 px-2">
+                        <Link to={navLink.link} className="text-nowrap">
                           {navLink.label}
                         </Link>
                       </li>
@@ -65,7 +69,12 @@ function Header() {
         </div>
 
         <div>
-          <button className="bg-[#1B4DE7] text-lg font-bold py-4 px-10 rounded-lg shadow-md shadow-blue-950">Log in</button>
+          <button 
+            className="bg-[#1B4DE7] hover:bg-[#4F7FD3] text-lg font-bold py-4 px-10 rounded-lg shadow-md shadow-blue-950 text-nowrap"
+            onClick={() => navigate("/login")}
+          >
+            Log in
+          </button>
         </div>
       </nav>
     </header>

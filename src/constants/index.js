@@ -42,7 +42,7 @@ export const topNavLinks = [
     label: "Trading Categories",
   },
   {
-    link: "insight",
+    link: "insights",
     label: "Insight",
   },
   {

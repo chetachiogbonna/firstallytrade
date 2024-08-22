@@ -6,5 +6,49 @@
 @layer components {
   body {
     color: white;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .hero {
+    /* background-image: url(../public/assets/images/logo.png); */
+    background-color: red;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: calc(100dvh);
+  }
+
+  .hero2 {
+    background-image: url(/assets/images/logo.png);
+    background-color: red;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100dvw;
+    height: 100dvh;
+  }
+
+  .hero3 {
+    background-image: url(/assets/images/original.png);
+    background-color: red;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100dvw;
+    height: 100dvh;
+  }
+
+  @media screen and (max-width: 970px) {
+    .hero2 {
+      background-size: contain;
+    }
+  }
+
+  @media screen and (max-width: 850px) {
+    .hero3 {
+      background-size: contain;
+    }
+  }
+
+  .about_quote {
+    line-height: 23px;
   }
 }
