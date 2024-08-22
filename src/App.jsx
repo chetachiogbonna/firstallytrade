@@ -1,9 +1,19 @@
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom"
+import RootLayout from "./layouts/RootLayout"
+import { About, Home } from "./pages/root"
+
 function App() {
-  return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-  )
+  const router = createBrowserRouter(createRoutesFromElements(
+    <>
+      <Route path="/" element={<RootLayout />}>
+        <Route index element={<Home />} />
+        <Route path="/about" element={<About />} />
+      
+      </Route>
+    </>
+  ))
+
+  return <RouterProvider router={router} />
 }
 
 export default App
